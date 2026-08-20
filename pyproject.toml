@@ -1,0 +1,190 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-api-service"
+version = "1.0.0"
+description = "Production-ready LLM API service using Ollama with Qwen models"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+license = {text = "MIT"}
+keywords = ["llm", "ollama", "qwen", "fastapi", "api", "inference"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: FastAPI",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# Core dependencies (minimal)
+dependencies = [
+    "ollama>=0.1.0,<1",
+    "pydantic>=2.0.0,<3",
+    "pydantic-settings>=2.0.0,<3",
+    "python-dotenv>=1.0.0,<2",
+]
+
+[project.optional-dependencies]
+# API server dependencies
+api = [
+    "fastapi>=0.115.0,<1",
+    "uvicorn[standard]>=0.30.0,<1",
+    "python-multipart>=0.0.20,<1",
+]
+
+# Testing dependencies
+test = [
+    "pytest>=8.0.0,<9",
+    "pytest-asyncio>=0.21.0,<1",
+    "httpx>=0.27.0,<1",
+    "requests>=2.31.0,<3",
+]
+
+# Development dependencies (all of the above)
+dev = [
+    "llm-api-service[api,test]",
+    "black>=24.0.0,<25",
+    "ruff>=0.8.0,<1",
+    "mypy>=1.8.0,<2",
+]
+
+# Monitoring & observability
+monitoring = [
+    "prometheus-client>=0.20.0,<1",
+    "opentelemetry-api>=1.20.0,<2",
+    "opentelemetry-sdk>=1.20.0,<2",
+]
+
+# Rate limiting & security
+security = [
+    "slowapi>=0.1.9,<1",
+    "python-jose[cryptography]>=3.3.0,<4",
+]
+
+# All optional features
+all = [
+    "llm-api-service[api,test,dev,monitoring,security]",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/llm-api-service"
+Repository = "https://github.com/yourusername/llm-api-service"
+Documentation = "https://github.com/yourusername/llm-api-service/blob/main/README.md"
+Issues = "https://github.com/yourusername/llm-api-service/issues"
+
+[project.scripts]
+llm-api = "api.__main__:main"
+
+[tool.setuptools]
+packages = ["llm", "api"]
+
+[tool.setuptools.package-data]
+llm = ["py.typed"]
+api = ["py.typed"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["llm", "llm.*", "api", "api.*"]
+exclude = ["tests*", "*.tests*", "benchmarks*", "*.benchmarks*"]
+namespaces = false
+
+[tool.pytest.ini_options]
+testpaths = ["LLM-Model/tests"]
+addopts = "-ra -v"
+markers = [
+    "integration: integration tests with Ollama",
+    "slow: slow running tests",
+    "unit: fast unit tests",
+]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.env
+  | build
+  | dist
+  | __pycache__
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+follow_imports = "normal"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "ollama.*",
+    "pydantic_settings.*",
+]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["llm", "api"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
