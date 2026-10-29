@@ -1,0 +1,9 @@
+﻿Model,RAG Context,Retrieval Miss,Outdated Doc Cited,Unsupported / No Gold Cit,Hallucinated Chunk ID,False Refusal (on Answerable),Missed Refusal (on Unanswerable),Runtime Timeout/Error
+Qwen/Qwen3.5-4B (Report Baseline),no_rag,0,0,2,0,298,0,0
+Qwen/Qwen3.5-4B (Report Baseline),best_dense,0,0,0,0,0,23,0
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid,0,0,0,0,0,22,0
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid_reranker,0,10,0,0,0,23,0
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),no_rag,0,0,1,0,299,0,0
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_dense,0,10,35,35,10,9,0
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid,0,10,30,30,0,9,0
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid_reranker,0,0,21,11,0,9,0

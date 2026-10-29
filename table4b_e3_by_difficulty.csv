@@ -1,0 +1,13 @@
+﻿Model,RAG Context,Difficulty,N,Citation F1 (%),Aux Token-F1
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid,single_hop,96,100.0,47.3
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid,multi_section,104,83.3,44.9
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid,temporal_procedural,100,86.7,52.3
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid_reranker,single_hop,96,100.0,46.4
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid_reranker,multi_section,104,83.3,46.1
+Qwen/Qwen3.5-4B (Report Baseline),best_hybrid_reranker,temporal_procedural,100,90.0,50.3
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid,single_hop,96,89.6,53.8
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid,multi_section,104,64.1,47.5
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid,temporal_procedural,100,81.7,49.8
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid_reranker,single_hop,96,99.0,53.8
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid_reranker,multi_section,104,73.7,47.8
+Qwen/Qwen3-4B-Instruct-2507 (Supplementary),best_hybrid_reranker,temporal_procedural,100,76.7,48.2
